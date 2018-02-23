@@ -1,0 +1,19 @@
+body {
+  position: relative;
+  width: auto;
+  font-family: sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+#country-information-section {
+  display: flex;
+}
+
+#main-map {
+  margin: 5px;
+  height: 500px;
+  width: 100%;
+}
