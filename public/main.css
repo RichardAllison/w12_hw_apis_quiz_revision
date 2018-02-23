@@ -4,16 +4,37 @@ body {
   font-family: sans-serif;
 }
 
-h1 {
+header {
   text-align: center;
+}
+
+ul {
+  list-style: none;
 }
 
 #country-information-section {
   display: flex;
 }
 
+#country-info {
+  width: 700px;
+}
+
 #main-map {
-  margin: 5px;
+  margin: 10px;
   height: 500px;
   width: 100%;
+}
+
+#revise-section {
+  text-align: center;
+}
+
+footer {
+  height: 40px;
+  padding: 50px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: #AAA;
+  text-align: center;
 }
