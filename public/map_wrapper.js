@@ -18,7 +18,7 @@ MapWrapper.prototype.addMarker = function(coords) {
 //     const map = this.googleMap;
 //     this.addMarker(latLng)
 
-    // the code below to show information about a country by clicking somewhere on the map. Problem is to get country information back it has to make the request every time.
+    // the code below to show information about a country by clicking somewhere on the map. Problem is to get country information back it has to make the countries API request every time.
 // ----------------
     // const geocoder = new google.maps.Geocoder;
     // geocoder.geocode({'location': latLng}, function(results, status) {
@@ -50,32 +50,3 @@ MapWrapper.prototype.addMarker = function(coords) {
 
 //   }.bind(this));
 // };
-
-// // MapWrapper.prototype.addClickEvent = function () {
-//   google.maps.event.addListener(this.googleMap, 'click', function (event) {
-//     const latLng = { lat: event.latLng.lat(), lng: event.latLng.lng() }
-//     this.addMarker(latLng);
-//     const geocoder = new google.maps.Geocoder;
-//     const infowindow = new google.maps.InfoWindow;
-//         geocoder.geocode({'location': latLng}, function(results, status) {
-//           if (status === 'OK') {
-//             if (results[0]) {
-//               map.setZoom(11);
-//               var marker = new google.maps.Marker({
-//                 position: latlng,
-//                 map: map
-//               });
-//               // infowindow.setContent(results[0].formatted_address);
-//               // infowindow.open(map, marker);
-//               console.log("worked");
-//             } else {
-//               // window.alert('No results found');
-//               console.log("didn't work");
-//             }
-//           } else {
-//             // window.alert('Geocoder failed due to: ' + status);
-//             console.log("failed");
-//           }
-//         });
-//       })
-//   }.bind(this);

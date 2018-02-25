@@ -6,15 +6,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const hPButton = document.getElementById("harry-potter-button")
   hPButton.addEventListener("click", showHPSection);
 
-  if (localStorage.getItem('lastSession')) {
-    if (localStorage.getItem('lastSession') === "Geography") {
+  if (localStorage.getItem("lastSession")) {
+    if (localStorage.getItem("lastSession") === "Geography") {
       showGeographySection();
 
-    } else if (localStorage.getItem('lastSession') === "Harry Potter") {
-        showHPSection();
+    } else if (localStorage.getItem("lastSession") === "Harry Potter") {
+      showHPSection();
     }
   }
-  const copyrightNotice = createElement("p", `${'\u00A9'} Richard Allison ${(new Date().getFullYear())}. All rights reserved.`)
+  const copyrightNotice = createElement("p", `${"\u00A9"} Richard Allison ${(new Date().getFullYear())}. All rights reserved.`)
   document.querySelector("footer").appendChild(copyrightNotice);
 });
 // ----------------
@@ -27,7 +27,7 @@ const createElement = function (element, text) {
 }
 
 const rememberSession = function (lastSession) {
-  localStorage.setItem('lastSession', lastSession);
+  localStorage.setItem("lastSession", lastSession);
 }
 // ----------------
 const showGeographySection = function () {
@@ -41,17 +41,6 @@ const showGeographySection = function () {
 
   const display = document.getElementById("display-section");
   display.innerText = "";
-
-  const regionSelectLabel = createElement("label", "Region: ")
-  regionSelectLabel.setAttribute("for", "region-select");
-  display.appendChild(regionSelectLabel);
-  const regionSelect = createElement("select", "Region: ")
-  regionSelect.id = "region-select";
-  display.appendChild(regionSelect);
-  const regionDefaultOption = createElement("option", "Select a region");
-  regionDefaultOption.disabled = true;
-  regionDefaultOption.setAttribute("selected", true);
-  regionSelect.appendChild(regionDefaultOption);
 
   const countrySelectLabel = createElement("label", "Country: ")
   countrySelectLabel.setAttribute("for", "country-select");
@@ -78,12 +67,11 @@ const showGeographySection = function () {
   const coords = {lat: 0, lng: 0}
   const map = new MapWrapper(mapDiv, coords, 2);
   // map.addClickEvent();
-
-  makeCountriesRequest(countriesRequestComplete);
+  const url = "https://restcountries.eu/rest/v2/all"
+  makeRequest(url, countriesRequestComplete);
 }
 // ----------------
-const makeCountriesRequest = function (callback) {
-  const url = "https://restcountries.eu/rest/v2/all"
+const makeRequest = function (url, callback) {
   const request = new XMLHttpRequest();
   request.open("GET", url);
   request.addEventListener("load", callback);
@@ -107,7 +95,7 @@ const populateList = function (countries) {
     select.appendChild(option);
   });
 
-  select.addEventListener('change', function () {
+  select.addEventListener("change", function () {
     const index = this.value;
     const country = countries[index];
     displayCountryInfo(country);
@@ -139,7 +127,7 @@ const displayCountryInfo = function (country) {
   languages.appendChild(languagesList)
 
   country.languages.forEach(function (language) {
-    const langLi = createElement('li', `${language.name} (${language.nativeName})`);
+    const langLi = createElement("li", `${language.name} (${language.nativeName})`);
     languagesList.appendChild(langLi);
   });
 
@@ -149,7 +137,7 @@ const displayCountryInfo = function (country) {
   currencies.appendChild(currenciesList)
 
   country.currencies.forEach(function (currency) {
-    const currLi = createElement('li', `${currency.code}: ${currency.name} (${currency.symbol})`);
+    const currLi = createElement("li", `${currency.code}: ${currency.name} (${currency.symbol})`);
     currenciesList.appendChild(currLi);
   });
 
@@ -159,13 +147,13 @@ const displayCountryInfo = function (country) {
   regionalBlocs.appendChild(regionalBlocsList)
 
   country.regionalBlocs.forEach(function (regionalBloc) {
-    const blocLi = document.createElement('li');
+    const blocLi = document.createElement("li");
     blocLi.innerText = `${regionalBloc.name}`
     regionalBlocsList.appendChild(blocLi);
   });
 
   const coords = {lat: country.latlng[0], lng: country.latlng[1]};
-  const mapDiv = document.querySelector('#main-map');
+  const mapDiv = document.querySelector("#main-map");
   const map = new MapWrapper(mapDiv, coords, 4);
   map.addMarker(coords);
   // map.addClickEvent();
@@ -203,15 +191,8 @@ const showHPSection = function () {
   characterInfoDiv.id = "character-info"
   characterInfoSection.appendChild(characterInfoDiv);
 
-  makeHPRequest(hPRequestComplete);
-}
-// ----------------
-const makeHPRequest = function (callback) {
   const url = "http://hp-api.herokuapp.com/api/characters"
-  const request = new XMLHttpRequest();
-  request.open("GET", url);
-  request.addEventListener("load", callback);
-  request.send();
+  makeRequest(url, hPRequestComplete);
 }
 // ----------------
 const hPRequestComplete = function () {
@@ -231,7 +212,7 @@ const populateHPList = function (characters) {
     select.appendChild(option);
   });
 
-  select.addEventListener('change', function () {
+  select.addEventListener("change", function () {
     const index = this.value;
     const character = characters[index];
     displayCharacterInfo(character);
@@ -274,9 +255,9 @@ const displayCharacterInfo = function (character) {
   infoList.appendChild(wand);
   const wandInfoList = createElement("ul");
   wand.appendChild(wandInfoList);
-  wandInfoList.appendChild(createElement('li', character.wand.wood));
-  wandInfoList.appendChild(createElement('li', character.wand.core));
-  wandInfoList.appendChild(createElement('li', `${character.wand.length}\"`));
+  wandInfoList.appendChild(createElement("li", character.wand.wood));
+  wandInfoList.appendChild(createElement("li", character.wand.core));
+  wandInfoList.appendChild(createElement("li", `${character.wand.length}\"`));
   infoList.appendChild(createElement("li", `Patronus: ${character.patronus}`));
   infoList.appendChild(createElement("li", `Actor: ${character.actor}`));
 }
