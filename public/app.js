@@ -139,8 +139,7 @@ const displayCountryInfo = function (country) {
   languages.appendChild(languagesList)
 
   country.languages.forEach(function (language) {
-    const langLi = document.createElement('li');
-    langLi.innerText = `${language.name} (${language.nativeName})`
+    const langLi = createElement('li', `${language.name} (${language.nativeName})`);
     languagesList.appendChild(langLi);
   });
 
@@ -150,8 +149,7 @@ const displayCountryInfo = function (country) {
   currencies.appendChild(currenciesList)
 
   country.currencies.forEach(function (currency) {
-    const currLi = document.createElement('li');
-    currLi.innerText = `${currency.code}: ${currency.name} (${currency.symbol})`
+    const currLi = createElement('li', `${currency.code}: ${currency.name} (${currency.symbol})`);
     currenciesList.appendChild(currLi);
   });
 
@@ -189,7 +187,7 @@ const showHPSection = function () {
   const characterSelectLabel = createElement("label", "Character: ")
   characterSelectLabel.setAttribute("for", "character-select");
   display.appendChild(characterSelectLabel);
-  const characterSelect = createElement("select", "Region: ")
+  const characterSelect = createElement("select")
   characterSelect.id = "character-select";
   display.appendChild(characterSelect);
   const characterDefaultOption = createElement("option", "Select a character");
@@ -255,40 +253,30 @@ const displayCharacterInfo = function (character) {
   charImg.src = character.image;
   charImg.width = 200;
   charImgLi.appendChild(charImg);
+  if (character.hogwartsStudent) {
+    infoList.appendChild(createElement("li", "Hogwarts Student"));
+  }
+  if (character.hogwartsStaff) {
+    infoList.appendChild(createElement("li", "Hogwarts Staff"));
+  }
+  if (character.alive) {
+    infoList.appendChild(createElement("li", "Alive"));
+  } else {
+    infoList.appendChild(createElement("li", "Deceased"));
+  }
   infoList.appendChild(createElement("li", `Species: ${character.species}`));
-  // infoList.appendChild(createElement("li", `Population: ${country.population}`));
-  // infoList.appendChild(createElement("li", `Area: ${country.area} km²`));
-  // const languages = createElement("li", "Official languages: ");
-  // infoList.appendChild(languages);
-  // const languagesList = createElement("ul");
-  // languages.appendChild(languagesList)
-  //
-  // country.languages.forEach(function (language) {
-  //   const langLi = document.createElement('li');
-  //   langLi.innerText = `${language.name} (${language.nativeName})`
-  //   languagesList.appendChild(langLi);
-  // });
-  //
-  // const currencies = createElement("li", "Currencies: ");
-  // infoList.appendChild(currencies);
-  // const currenciesList = createElement("ul");
-  // currencies.appendChild(currenciesList)
-  //
-  // country.currencies.forEach(function (currency) {
-  //   const currLi = document.createElement('li');
-  //   currLi.innerText = `${currency.code}: ${currency.name} (${currency.symbol})`
-  //   currenciesList.appendChild(currLi);
-  // });
-  //
-  // const regionalBlocs = createElement("li", "Regional Blocs: ");
-  // infoList.appendChild(regionalBlocs);
-  // const regionalBlocsList = createElement("ul");
-  // regionalBlocs.appendChild(regionalBlocsList)
-  //
-  // country.regionalBlocs.forEach(function (regionalBloc) {
-  //   const blocLi = document.createElement('li');
-  //   blocLi.innerText = `${regionalBloc.name}`
-  //   regionalBlocsList.appendChild(blocLi);
-  // });
-
+  infoList.appendChild(createElement("li", `Gender: ${character.gender}`));
+  infoList.appendChild(createElement("li", `House: ${character.house}`));
+  infoList.appendChild(createElement("li", `Ancestry: ${character.ancestry}`));
+  infoList.appendChild(createElement("li", `Eye Colour: ${character.eyeColour}`));
+  infoList.appendChild(createElement("li", `Hair Colour: ${character.hairColour}`));
+  const wand = createElement("li", "Wand: ");
+  infoList.appendChild(wand);
+  const wandInfoList = createElement("ul");
+  wand.appendChild(wandInfoList);
+  wandInfoList.appendChild(createElement('li', character.wand.wood));
+  wandInfoList.appendChild(createElement('li', character.wand.core));
+  wandInfoList.appendChild(createElement('li', `${character.wand.length}\"`));
+  infoList.appendChild(createElement("li", `Patronus: ${character.patronus}`));
+  infoList.appendChild(createElement("li", `Actor: ${character.actor}`));
 }
